@@ -1,0 +1,7 @@
+{
+  "name": "furniture-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
