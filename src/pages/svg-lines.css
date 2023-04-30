@@ -1,0 +1,42 @@
+.svg_container{
+    overflow: scroll;
+}
+svg{
+    background-color: white;
+}
+.visibleLine{
+    stroke: black;
+    fill: white;
+    stroke-width: 0.75mm;
+}
+.narrowLine{
+    stroke: black;
+    fill: transparent;
+    stroke-width: 0.18mm;
+}
+
+.dottedLine{
+    stroke: black;
+    fill: white;
+    stroke-dasharray: 25,25;
+    stroke-width: 0.18mm;
+}
+.dottedLine_2{
+    stroke: black;
+    fill: transparent;
+    stroke-dasharray: 5,5;
+    stroke-width: 0.18mm;
+}
+.circle{
+    stroke:black;
+    stroke-width: "5";
+    fill: "black";
+}
+.clickableCircle{
+    stroke: black;
+    stroke-width: '1';
+    fill: transparent;
+}
+ion-slides {
+    height: 100%;
+  }
