@@ -87,11 +87,16 @@ const Home: React.FC = () => {
     document.getElementById("technicalDrawing_front").style.visibility="visible";
     document.getElementById("technicalDrawing_side").style.visibility="visible";
     document.getElementById("technicalDrawing_top").style.visibility="visible";
+    document.getElementById("frontTDrawingbtn").style.visibility="visible";
+    document.getElementById("sideTDrawingbtn").style.visibility="visible";
+    document.getElementById("topTDrawingbtn").style.visibility="visible";
     document.getElementById("first_group").style.visibility="hidden";
     document.getElementById("second_group").style.visibility="hidden";
     document.getElementById("third_group").style.visibility="hidden";
     document.getElementById("drawing_top").style.visibility="hidden";
     document.getElementById("drawing_front").style.visibility="hidden";
+    document.getElementById("topDrawingbtn").style.visibility="hidden";
+    document.getElementById("frontDrawingbtn").style.visibility="hidden";
     setViewBoxValue('0 0 2000 2000');
     setHeightUpdated(heightInputRef.current.value);
     setWidthUpdated(widthInputRef.current.value);
@@ -424,12 +429,16 @@ const Home: React.FC = () => {
     document.getElementById("technicalDrawing_front").style.visibility="hidden";
     document.getElementById("technicalDrawing_side").style.visibility="hidden";
     document.getElementById("technicalDrawing_top").style.visibility="hidden";
+    document.getElementById("frontTDrawingbtn").style.visibility="hidden";
+    document.getElementById("sideTDrawingbtn").style.visibility="hidden";
+    document.getElementById("topTDrawingbtn").style.visibility="hidden";
     document.getElementById("first_group").style.visibility="hidden";
     document.getElementById("second_group").style.visibility="hidden";
     document.getElementById("third_group").style.visibility="hidden";
     document.getElementById("drawing_top").style.visibility="visible";
     document.getElementById("drawing_front").style.visibility="visible";
-
+    document.getElementById("topDrawingbtn").style.visibility="visible";
+    document.getElementById("frontDrawingbtn").style.visibility="visible";
 
     setViewBoxValue('0 0 2000 2000');
     setHeightUpdated(heightInputRef.current.value);
@@ -666,27 +675,27 @@ const Home: React.FC = () => {
             </IonCol>          
           </IonRow>
           <IonRow>
-            <IonCol size='auto'>
+            <IonCol id='topDrawingbtn' size='auto'>
               <IonItem>
                 <IonButton onClick={showTopDrawing}>Felülnézet(Jellegrajz)</IonButton>
               </IonItem>
             </IonCol>          
-            <IonCol size='auto'>
+            <IonCol id='frontDrawingbtn' size='auto'>
               <IonItem>
                 <IonButton onClick={showFrontDrawing}>Elölnézet(Jellegrajz)</IonButton>
               </IonItem>
             </IonCol>          
-            <IonCol size='auto'>
+            <IonCol id='frontTDrawingbtn' size='auto'>
               <IonItem>
                 <IonButton onClick={showFrontTechnicalDrawing}>Elölnézet(Tervrajz)</IonButton>
               </IonItem>
             </IonCol>
-            <IonCol size='auto'>
+            <IonCol id='sideTDrawingbtn' size='auto'>
               <IonItem>
                 <IonButton onClick={showSideTechnicalDrawing}>Oldalnézet(Tervrajz)</IonButton>
               </IonItem>
             </IonCol>
-            <IonCol size='auto'>
+            <IonCol id='topTDrawingbtn' size='auto'>
               <IonItem>
                 <IonButton onClick={showTopTechnicalDrawing}>Felülnézet(Tervrajz)</IonButton>
               </IonItem>
