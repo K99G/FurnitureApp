@@ -6,8 +6,13 @@ svg{
 }
 .visibleLine{
     stroke: black;
-    fill: white;
+    fill: transparent;
     stroke-width: 0.75mm;
+}
+.arrow{
+    stroke: black;
+    fill: black;
+    stroke-width: 0.18mm;
 }
 .narrowLine{
     stroke: black;
@@ -15,7 +20,7 @@ svg{
     stroke-width: 0.18mm;
 }
 
-.dottedLine{
+.dottedLine_1{
     stroke: black;
     fill: white;
     stroke-dasharray: 25,25;
@@ -27,6 +32,12 @@ svg{
     stroke-dasharray: 5,5;
     stroke-width: 0.18mm;
 }
+.dottedLine_3{
+    stroke: black;
+    fill: transparent;
+    stroke-dasharray: 20,10,4,10;
+    stroke-width: 0.18mm;
+}
 .circle{
     stroke:black;
     stroke-width: "5";
@@ -34,8 +45,22 @@ svg{
 }
 .clickableCircle{
     stroke: black;
-    stroke-width: '1';
+    stroke-width: '7';
     fill: transparent;
+}
+.polyline{
+    stroke: black;
+    stroke-width: 0.75mm;
+    fill: white;
+}
+.cut{
+    stroke: black;
+    stroke-width: 0.18mm;
+    stroke-dasharray: 20,20;
+}
+svg text{
+    text-anchor: middle;
+    dominant-baseline: middle;
 }
 ion-slides {
     height: 100%;
