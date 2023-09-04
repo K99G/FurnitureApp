@@ -20,7 +20,7 @@
       "purpose": "any"
     }
   ],
-  "start_url": "index.html",
+  "start_url": "home",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff"
