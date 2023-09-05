@@ -1,16 +1,16 @@
-import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 //import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
-import React, { useEffect, useRef, useState } from 'react';
-import { getElement } from 'ionicons/dist/types/stencil-public-runtime';
+import React, {  useRef, useState } from 'react';
+//import { getElement } from 'ionicons/dist/types/stencil-public-runtime';
 import './svg-lines.css';
-import { Console } from 'console';
-import { sign } from 'crypto';
+//import { Console } from 'console';
+//import { sign } from 'crypto';
 
 var radius = 75;
 
 function Cut(parent: string,ID: string, path: string) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var cut=document.createElementNS("http://www.w3.org/2000/svg","path");
     cut.setAttribute('id',ID);
@@ -21,7 +21,7 @@ function Cut(parent: string,ID: string, path: string) {
 }
 
 function Arrow(direction:string, parent: string,ID: string, x: number, y:number) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var pathVisible=document.createElementNS("http://www.w3.org/2000/svg","path");
     pathVisible.setAttribute('id',ID);
@@ -48,32 +48,32 @@ function Arrow(direction:string, parent: string,ID: string, x: number, y:number)
       signs=["-", "-","-", "-","-", "-","-", "-","-"];
       break;
     }
-  if(direction=="up" || direction=="down"){
-    document.getElementById(ID).setAttribute('d', ' ' +'M' + (x) + ',' + (y) + 
+  if(direction==="up" || direction==="down"){
+    document.getElementById(ID).setAttribute('d', 'M' + (x) + ',' + (y) + 
                                                   ' v ' +(signs[0])+''+(+dimensions[2]) + 
                                                   ' l ' +(signs[1])+''+(+dimensions[0]) +' '+(signs[2])+''+(+dimensions[1])+
                                                   ' l ' +(signs[3])+''+(+dimensions[0]) +' '+(signs[4])+''+(+dimensions[1]+dimensions[2])+
                                                   ' l ' +(signs[5])+''+(+dimensions[0]) +' '+(signs[6])+''+(+dimensions[1]+dimensions[2])+
-                                                  ' l ' +(signs[7])+''+(+dimensions[0]) +' '+(signs[8])+''+(+dimensions[1])+' Z'+ ' ');
-  } else if(direction=="right" || direction=="left"){
-    document.getElementById(ID).setAttribute('d', ' ' +'M' + (x) + ',' + (y) + 
+                                                  ' l ' +(signs[7])+''+(+dimensions[0]) +' '+(signs[8])+''+(+dimensions[1])+' Z');
+  } else if(direction==="right" || direction==="left"){
+    document.getElementById(ID).setAttribute('d', 'M' + (x) + ',' + (y) + 
                                                   ' h ' +(signs[0])+''+(+dimensions[2]) + 
                                                   ' l ' +(signs[1])+''+(+dimensions[1]) +' '+(signs[2])+''+(+dimensions[0])+
                                                   ' l ' +(signs[3])+''+(+dimensions[1]+dimensions[2]) +' '+(signs[4])+''+(+dimensions[0])+
                                                   ' l ' +(signs[5])+''+(+dimensions[1]+dimensions[2]) +' '+(signs[6])+''+(+dimensions[0])+
-                                                  ' l ' +(signs[7])+''+(+dimensions[1]) +' '+(signs[8])+''+(+dimensions[0])+' Z'+ ' ');
+                                                  ' l ' +(signs[7])+''+(+dimensions[1]) +' '+(signs[8])+''+(+dimensions[0])+' Z');
   } else{
-    document.getElementById(ID).setAttribute('d', ' ' +'M' + (x) + ',' + (y) + 
+    document.getElementById(ID).setAttribute('d', 'M' + (x) + ',' + (y) + 
                                                   ' v ' +(signs[0])+''+(+dimensions[2]) + 
                                                   ' l ' +(signs[1])+''+(+dimensions[0]) +' '+(signs[2])+''+(+dimensions[1])+
                                                   ' l ' +(signs[3])+''+(+dimensions[0]) +' '+(signs[4])+''+(+dimensions[1]+dimensions[2])+
                                                   ' l ' +(signs[5])+''+(+dimensions[0]) +' '+(signs[6])+''+(+dimensions[1]+dimensions[2])+
-                                                  ' l ' +(signs[7])+''+(+dimensions[0]) +' '+(signs[8])+''+(+dimensions[1])+' Z'+ ' ');
+                                                  ' l ' +(signs[7])+''+(+dimensions[0]) +' '+(signs[8])+''+(+dimensions[1])+' Z');
   }
 }
 
 function PathVisible(parent: string,ID: string, path: string) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var pathVisible=document.createElementNS("http://www.w3.org/2000/svg","path");
     pathVisible.setAttribute('id',ID);
@@ -84,7 +84,7 @@ function PathVisible(parent: string,ID: string, path: string) {
 }
 
 function PathDotted(type: number,parent: string,ID: string, path: string) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var pathDotted=document.createElementNS("http://www.w3.org/2000/svg","path");
     pathDotted.setAttribute('id',ID);
@@ -95,7 +95,7 @@ function PathDotted(type: number,parent: string,ID: string, path: string) {
 }
 
 function PathNarrowLine(parent: string,ID: string, path: string) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var pathNarrowLine=document.createElementNS("http://www.w3.org/2000/svg","path");
     pathNarrowLine.setAttribute('id',ID);
@@ -119,7 +119,7 @@ function PathCut(parent: string,ID: string, path: string) {
 }
 
 function Polyline(parent: string,ID: string, path: string) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var poly=document.createElementNS("http://www.w3.org/2000/svg","polyline");
     poly.setAttribute('id',ID);
@@ -138,7 +138,7 @@ function Rectangle(id: string, x: number, y: number, width: number, height: numb
 }
 
 function RectangleElement(parent: string, ID: string, x: number, y: number, width: number, height: number) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var rect=document.createElementNS("http://www.w3.org/2000/svg","rect");
     rect.setAttribute('id',ID);
@@ -152,7 +152,7 @@ function RectangleElement(parent: string, ID: string, x: number, y: number, widt
 }
 
 function RectangleElementCut(parent: string, ID: string, x: number, y: number, width: number, height: number) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var rect=document.createElementNS("http://www.w3.org/2000/svg","rect");
     rect.setAttribute('id',ID);
@@ -173,7 +173,7 @@ function Circle(ID: string, cx: number, cy: number) {
 }
 
 function CircleView(parent: string,ID: string, cx: number, cy: number) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var circle=document.createElementNS("http://www.w3.org/2000/svg","circle");
     circle.setAttribute('id',ID);
@@ -186,7 +186,7 @@ function CircleView(parent: string,ID: string, cx: number, cy: number) {
 }
 
 function CircleMeasure(parent: string,ID: string, cx: number, cy: number) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var circle=document.createElementNS("http://www.w3.org/2000/svg","circle");
     circle.setAttribute('id',ID);
@@ -201,7 +201,7 @@ function CircleMeasure(parent: string,ID: string, cx: number, cy: number) {
 
 
 function TextMeasure(parent: string,ID: string, x: number, y: number, value: number, deg:number) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var text=document.createElementNS("http://www.w3.org/2000/svg","text");
     text.setAttribute('id',ID);
@@ -217,7 +217,7 @@ function TextMeasure(parent: string,ID: string, x: number, y: number, value: num
 }
 
 function TextString(parent: string,ID: string, x: number, y: number, value: string) {
-  if(document.getElementById(parent).contains(document.getElementById(ID))==false)
+  if(document.getElementById(parent).contains(document.getElementById(ID))===false)
   {
     var text=document.createElementNS("http://www.w3.org/2000/svg","text");
     text.setAttribute('id',ID);
@@ -230,7 +230,7 @@ function TextString(parent: string,ID: string, x: number, y: number, value: stri
 }
 
 const Home: React.FC = () => {
-  var xOffset = 200;
+  //var xOffset = 200;
   var yOffset = 200;
   var corner = 10;
   var startingPoint = 200;
@@ -822,36 +822,7 @@ const Home: React.FC = () => {
     CircleMeasure("drawing_front","measure_drawer_circle", (startingPoint + width), (ystartingPoint + thickness + 100));
     TextMeasure("drawing_front","measure_drawer_text", (startingPoint + width + 5), (ystartingPoint + thickness + 100/2), 100,270);
 
-    /**Oldalnézet 
-    //Rectangle("plate_S",(200+width+xOffset),(200+length+yOffset),length,thickness);
-    document.getElementById("plate_S").setAttribute('x', ''+(200+width+xOffset)+'');
-    document.getElementById("plate_S").setAttribute('y', ''+(200+length+yOffset)+'');
-    document.getElementById("plate_S").setAttribute('width', length);
-    document.getElementById("plate_S").setAttribute('height', thickness);
-
-    //Rectangle();
-    document.getElementById("frontLeg").setAttribute('x', ''+(200+width+xOffset+25)+'');
-    document.getElementById("frontLeg").setAttribute('y', ''+(200+length+yOffset+thickness)+'');
-    document.getElementById("frontLeg").setAttribute('width','35');
-    document.getElementById("frontLeg").setAttribute('height',''+(height-thickness)+'');
-
-    //Rectangle();
-    document.getElementById("backLeg").setAttribute('x',''+(200+width+xOffset+length-25-35)+'');
-    document.getElementById("backLeg").setAttribute('y', ''+(200+length+yOffset+thickness)+'');
-    document.getElementById("backLeg").setAttribute('width','35');
-    document.getElementById("backLeg").setAttribute('height',''+(height-thickness)+'');
-
-    //Rectangle();
-    document.getElementById("crossLeg_S").setAttribute('x',''+(200+width+xOffset+25+35)+'');
-    document.getElementById("crossLeg_S").setAttribute('y',''+(200+length+yOffset+height-130)+'');
-    document.getElementById("crossLeg_S").setAttribute('width',''+(length-2*(25+35))+'');
-    document.getElementById("crossLeg_S").setAttribute('height','30');
-
-    //Rectangle();
-    document.getElementById("drawer_S").setAttribute('x',''+(200+width+xOffset+25+35)+'');
-    document.getElementById("drawer_S").setAttribute('y',''+(200+length+yOffset+thickness)+'');
-    document.getElementById("drawer_S").setAttribute('width',''+(length-(2*(25+35)))+'');
-    document.getElementById("drawer_S").setAttribute('height','100');*/
+    
 
     /**Csomópont 1. */
 
@@ -1008,26 +979,26 @@ const Home: React.FC = () => {
               </pattern>
             </defs>
 
-        /**Tervrajz */
-            /**Elölnézet */
+        {/**Tervrajz */}
+            {/**Elölnézet */}
             <g id="technicalDrawing_front" visibility="hidden"></g>
-          /**Oldalnézet */
+          {/**Oldalnézet */}
             <g id="technicalDrawing_side"></g>
-            /**Felülnézet */
+            {/**Felülnézet */}
             <g id="technicalDrawing_top"></g>
-          /**Jellegrajz*/
-            /**Felülnézet */
+          {/**Jellegrajz*/}
+            {/**Felülnézet */}
             <g id="drawing_top"></g>
-          /**Elölnézet */
+          {/**Elölnézet */}
             <g id="drawing_front"></g>
-          /**Oldalnézet */
+          {/**Oldalnézet */}
             <g id='drawing_side'></g>
-          /**Csomópontok */
-          /**Csomópont 1. */
+          {/**Csomópontok */}
+          {/**Csomópont 1. */}
             <g id='first_group'></g>
-          /**Csomópont 2. */
+          {/**Csomópont 2. */}
             <g id='second_group'></g>
-          /**Csomópont 3. */
+          {/**Csomópont 3. */}
             <g id="third_group"></g>
 
           </svg>
