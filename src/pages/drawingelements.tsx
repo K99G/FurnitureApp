@@ -1,8 +1,11 @@
+import { waitFor } from "@testing-library/react";
+import { useState } from "react";
+
 var radius = 75;
 
 export function PathCut({ ID, path }) {
     return (
-        <path id={ID} fill="url(#cutPattern)" stroke-width="0.75mmm" stroke="black" d={path} />
+        <path id={ID} fill="url(#cutPattern)" strokeWidth="0.75mmm" stroke="black" d={path} />
     )
 }
 
@@ -101,13 +104,13 @@ export function RectangleElement({ ID, x, y, width, height }) {
 
 export function RectangleElementCut({ ID, x, y, width, height }) {
     return (
-        <rect id={ID} fill="url(#cutPattern)" stroke-width="0.75mm" stroke="black" x={x} y={y} width={width} height={height} />
+        <rect id={ID} fill="url(#cutPattern)" strokeWidth="0.75mm" stroke="black" x={x} y={y} width={width} height={height} />
     )
 }
 
 export function RectangleElementCutRound({ ID, x, y, width, height, rx, ry }) {
     return (
-        <rect id={ID} fill="url(#cutPattern)" stroke-width="0.75mm" stroke="black" x={x} y={y} width={width} height={height} rx={rx} ry={ry} />
+        <rect id={ID} fill="url(#cutPattern)" strokeWidth="0.75mm" stroke="black" x={x} y={y} width={width} height={height} rx={rx} ry={ry} />
     )
 }
 
@@ -120,8 +123,23 @@ export function RectangleElementRound({ ID, x, y, width, height, rx, ry }) {
 
 export function CircleView({ ID, cx, cy, onClick }) {
 
+    var color="black";
+    /*const [color, setColor]=useState("")
+    function flash(){
+        setColor("red");
+        setTimeout(()=>this.setColor("black"),6000);
+    }*/
     return (
-        <circle id={ID} className="clickableCircle" r={radius} cx={cx} cy={cy} onClick={onClick} />
+        <circle id={ID} r={radius} cx={cx} cy={cy}
+            stroke={color}
+            strokeWidth='7'
+            fill="transparent"
+            fillOpacity="0.4"
+            onClick={onClick}
+            onMouseOver={() => (document.getElementById(ID).setAttribute("fill", "gray"))}
+            onMouseLeave={() => (document.getElementById(ID).setAttribute("fill", "transparent"))}
+            /*onLoad={flash}*/
+        />
     )
 }
 

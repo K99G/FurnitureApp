@@ -43,11 +43,18 @@ svg{
     stroke-width: "5";
     fill: "black";
 }
-.clickableCircle{
+/*.clickableCircleTransparent{
     stroke: black;
     stroke-width: '7';
     fill: transparent;
+    fill-opacity: 0.4;
 }
+.clickableCircleGrayed{
+    stroke: black;
+    stroke-width: '7';
+    fill: gray;
+    fill-opacity: 0.4;
+}*/
 .polyline{
     stroke: black;
     stroke-width: 0.75mm;

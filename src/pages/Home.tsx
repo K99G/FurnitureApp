@@ -1,18 +1,43 @@
-import { IonContent, IonItem, IonHeader, IonLabel,IonPage, IonSelect, IonTitle, IonToolbar, IonSelectOption } from '@ionic/react';
+import { IonContent, IonItem, IonHeader, IonLabel,IonPage, IonSelect, IonTitle, IonToolbar, IonSelectOption, IonButton } from '@ionic/react';
 import './Home.css';
 import React, { useState } from 'react';
 import './svg-lines.css';
 import { ChairView } from './components';
-import { isPlatform,  } from '@ionic/react';
+import { isPlatform  } from '@ionic/react';
 
 const Home: React.FC = () => {
   const [furniture, setFurniture]=useState('');
+  const isMobile=(isPlatform('pwa') || isPlatform('mobile') || isPlatform('mobileweb') || isPlatform('android'));
+  const alertOptions = {
+    header: 'Bútor kiválasztása',
+    subHeader: 'Figyelem!',
+    message: 'Váltás esetén az eddig felvitt adatok elvesznek!',
+  };
+  if(isMobile)
+  {
+    goFullScreen();
+  }
   var FurnitureSelected=() =>{
     switch (furniture) {
       case 'chair':
+        window.screen.orientation.unlock();
         return <ChairView></ChairView>;
+      case 'table':
+        {
+          if(isMobile)
+          {
+            window.screen.orientation.lock("landscape-primary");
+          }
+          return <ChairView></ChairView>
+        }
       default:
         return <></>;
+    }
+  }
+
+  async function goFullScreen(){
+    if (!document.fullscreenElement) {
+      await document.documentElement.requestFullscreen();
     }
   }
 
@@ -31,7 +56,7 @@ const Home: React.FC = () => {
         </IonHeader>
         <IonItem>
         <IonLabel>Bútor típusa</IonLabel>
-          <IonSelect onIonChange={(ev)=>setFurniture(ev.detail.value)}>
+          <IonSelect onIonChange={(ev)=>{setFurniture(ev.detail.value);}}interface='alert' interfaceOptions={alertOptions}>
             <IonSelectOption value="chair">Szék</IonSelectOption>
             <IonSelectOption value="table">Asztal</IonSelectOption>
             <IonSelectOption value="other">Más</IonSelectOption>
