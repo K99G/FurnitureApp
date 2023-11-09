@@ -137,6 +137,7 @@ export function ChairView() {
 
 function ChairCharacterView() {
   const [visibility, setVisibility] = useState('all');
+  const [size, setSize]=useState(4);
 
   function SVGPicture({ id }) {
     const [viewBoxValue, setViewBoxValue] = useState('0 0 0 0');
@@ -566,23 +567,29 @@ function ChairCharacterView() {
     var comp = () => {
       switch (id) {
         case "front":
+          setSize(4);
           return <FrontViewCharacter />
         case "side":
+          setSize(4);
           return <SideViewCharacter />
         case "top":
+          setSize(4);
           return <TopViewCharacter />
         case "first_circle":
+          setSize(12);
           return <FirstCircle />
         case "second_circle":
+          setSize(12);
           return <SecondCircle />
         case "third_circle":
+          setSize(12);
           return <ThirdCircle />
         default:
           return <h6>Invalid name!!</h6>
       }
     };
     return (
-      <IonCol size="12" size-sm="4">
+      <IonCol size="12" size-sm={size}>
         <svg id={id} viewBox={viewBoxValue} preserveAspectRatio='xMidYMid meet'>
           <defs>
             <pattern id="cutPattern" x="0" y="0" width="10" height="10" patternContentUnits='userSpaceOnUse' patternUnits='userSpaceOnUse'>
