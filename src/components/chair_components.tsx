@@ -1,16 +1,14 @@
 import { useState, useContext, useEffect, createContext } from "react";
 import { IonButton, IonCol, IonGrid, IonInput, IonItem, IonLabel, IonRow, IonToggle } from "@ionic/react";
-import { RectangleElement, RectangleElementCut, RectangleElementCutRound, RectangleElementRound, PathCut, PathDotted, PathNarrowLine, PathVisible, Polyline, PolylineDotted, CircleMeasure, CircleView, Cut, TextMeasure, TextString, Arrow } from './drawingelements'
+import { RectangleElement, RectangleElementCut, RectangleElementCutRound, RectangleElementRound, PathCut, PathDotted, PathNarrowLine, PathVisible, Polyline, PolylineDotted, CircleMeasure, CircleView, Cut, TextMeasure, TextString, Arrow, CutPattern } from './drawingelements'
 import { downloadDrawing } from "./converter";
 
 var radius = 75;
 var corner = 10;
 var startingPoint = 200;
-
 var leg = 45;
 var magnify = 4;
 var indentation = 25;
-
 var legSize = 45;
 var crossLegsize = 21;
 var crossLegThird = crossLegsize / 3;
@@ -37,8 +35,7 @@ export function ChairView() {
   const [lengthValue, setLengthValue] = useState(0);
   const [thicknessValue, setThicknessValue] = useState(0);
 
-
-  const [visibility, setVisibility] = useState(false)
+  const [visibility, setVisibility] = useState(false);
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
@@ -90,7 +87,6 @@ export function ChairView() {
     cColor = "default";
   }
 
-
   return (
     <IonGrid >
       <IonRow>
@@ -136,8 +132,28 @@ export function ChairView() {
 }
 
 function ChairCharacterView() {
-  const [visibility, setVisibility] = useState('all');
-  const [size, setSize]=useState(4);
+  const [type, setType] = useState("all");
+  const [size, setSize] = useState(4);
+
+  function Circles({ circleID }: { circleID: string }) {
+    return <>
+      <IonRow>
+        <IonCol size="auto">
+          <IonItem>
+            <IonButton onClick={() => downloadDrawing(document.getElementById("" + circleID + "_circle"))}>Exportálás</IonButton>
+          </IonItem>
+        </IonCol>
+        <IonCol size="auto">
+          <IonItem>
+            <IonButton onClick={() => setType("all")}>Vissza</IonButton>
+          </IonItem>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <SVGPicture id={"" + circleID + "_circle"} />
+      </IonRow>
+    </>
+  }
 
   function SVGPicture({ id }) {
     const [viewBoxValue, setViewBoxValue] = useState('0 0 0 0');
@@ -181,10 +197,10 @@ function ChairCharacterView() {
           <RectangleElement ID="rightleg_front_cut_TD" x={startingPoint + width - indentation - 5 - 21} y={startingPoint + thickness} width={21} height={80} />
 
           <TextMeasure ID="circle_2_text" x={(startingPoint + width - indentation - 17.5 - radius)} y={(startingPoint + thickness + 80 / 2 + radius * 2 / 3)} value={2} deg={0} />
-          <CircleView ID="circle_2" cx={(startingPoint + width - indentation - 5 - 21 / 2)} cy={(startingPoint + thickness + 80 / 2)} onClick={() => setVisibility("second")} />
+          <CircleView ID="circle_2" cx={(startingPoint + width - indentation - 5 - 21 / 2)} cy={(startingPoint + thickness + 80 / 2)} onClick={() => setType("second")} />
 
           <TextMeasure ID="circle_3_text" x={(startingPoint + width - indentation - 5 - 21 / 2 - radius)} y={(startingPoint + height - 130 + 15 - radius)} value={3} deg={0} />
-          <CircleView ID="circle_3" cx={(startingPoint + width - indentation - 5 - 21 / 2)} cy={startingPoint + height - 130 + 15} onClick={() => setVisibility("third")} />
+          <CircleView ID="circle_3" cx={(startingPoint + width - indentation - 5 - 21 / 2)} cy={startingPoint + height - 130 + 15} onClick={() => setType("third")} />
         </g>
       )
     }
@@ -320,7 +336,7 @@ function ChairCharacterView() {
             + (startingPoint + width - indentation - 5) + ',' + (startingPoint + legSize + indentation) + ' '} />
 
           <TextMeasure ID="circle_1_text" x={(startingPoint + width - indentation - legSize / 2 - radius)} y={(startingPoint + length - indentation - legSize / 2 + radius)} value={1} deg={0} />
-          <CircleView ID="circle_1" cx={(startingPoint + width - indentation - legSize / 2)} cy={(startingPoint + length - indentation - legSize / 2)} onClick={() => setVisibility("first")} />
+          <CircleView ID="circle_1" cx={(startingPoint + width - indentation - legSize / 2)} cy={(startingPoint + length - indentation - legSize / 2)} onClick={() => setType("first")} />
         </g>
       )
     }
@@ -448,7 +464,7 @@ function ChairCharacterView() {
       const width = +(useContext(WidthContext));
       const height = +(useContext(HeightContext));
       const thickness = +(useContext(ThicknessContext));
-      magnify = 4;
+
       useEffect(() => { setViewBoxValue('' + (startingPoint - 100) + ',' + (startingPoint - 100) + ',' + (300 * magnify + 40 + 100 + 200) + ',' + (thickness * magnify + 150 * magnify + 200) + '') },
         [width, height, thickness]);
 
@@ -524,7 +540,6 @@ function ChairCharacterView() {
     }
 
     function ThirdCircle() {
-      magnify = 4;
       useEffect(() => { setViewBoxValue('' + (startingPoint - 50) + ' ' + (startingPoint - 50) + ' ' + (60 * magnify + legSize * magnify + 50 * 2) + ' ' + (80 * magnify + 50 * 2) + '') },
         []);
       return (
@@ -564,6 +579,7 @@ function ChairCharacterView() {
         </g>
       )
     }
+
     var comp = () => {
       switch (id) {
         case "front":
@@ -588,95 +604,39 @@ function ChairCharacterView() {
           return <h6>Invalid name!!</h6>
       }
     };
+
     return (
       <IonCol size="12" size-sm={size}>
         <svg id={id} viewBox={viewBoxValue} preserveAspectRatio='xMidYMid meet'>
-          <defs>
-            <pattern id="cutPattern" x="0" y="0" width="10" height="10" patternContentUnits='userSpaceOnUse' patternUnits='userSpaceOnUse'>
-              <path d="M5,-5 l10,10
-                           M0,0 l10,10
-                           M-5,5 l10,10"
-                stroke="black" strokeWidth="1" />
-            </pattern>
-          </defs>
+          <CutPattern></CutPattern>
           {comp()}
         </svg>
       </IonCol>
     )
   }
+
   var drawings = () => {
-    switch (visibility) {
-      case "all":
-        return <>
-          <IonRow>
-            <IonCol size="auto">
-              <IonItem>
-                <IonButton onClick={downloadDrawingCharacter}>Exportálás</IonButton>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <SVGPicture id="front" />
-            <SVGPicture id="side" />
-            <SVGPicture id="top" />
-          </IonRow>
-        </>;
-      case "first":
-        return <>
-          <IonRow>
-            <IonCol size="auto">
-              <IonItem>
-                <IonButton onClick={() => downloadDrawing(document.getElementById("first_circle"))}>Exportálás</IonButton>
-              </IonItem>
-            </IonCol>
-            <IonCol size="auto">
-              <IonItem>
-                <IonButton onClick={() => setVisibility("all")}>Vissza</IonButton>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <SVGPicture id="first_circle" />
-          </IonRow>
-        </>;
-      case "second":
-        return <>
-          <IonRow>
-            <IonCol size="auto">
-              <IonItem>
-                <IonButton onClick={() => downloadDrawing(document.getElementById("second_circle"))}>Exportálás</IonButton>
-              </IonItem>
-            </IonCol>
-            <IonCol size="auto">
-              <IonItem>
-                <IonButton onClick={() => setVisibility("all")}>Vissza</IonButton>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <SVGPicture id="second_circle" />
-          </IonRow>
-        </>;
-      case "third":
-        return <>
-          <IonRow>
-            <IonCol size="auto">
-              <IonItem>
-                <IonButton onClick={() => downloadDrawing(document.getElementById("third_circle"))}>Exportálás</IonButton>
-              </IonItem>
-            </IonCol>
-            <IonCol size="auto">
-              <IonItem>
-                <IonButton onClick={() => setVisibility("all")}>Vissza</IonButton>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <SVGPicture id="third_circle" />
-          </IonRow>
-        </>;
+    if (type == "all") {
+      return <>
+        <IonRow>
+          <IonCol size="auto">
+            <IonItem>
+              <IonButton onClick={downloadDrawingCharacter}>Exportálás</IonButton>
+            </IonItem>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <SVGPicture id="front" />
+          <SVGPicture id="side" />
+          <SVGPicture id="top" />
+        </IonRow>
+      </>;
+    }
+    else {
+      return <Circles circleID={type} />
     }
   }
+
   return (
     <>
       {drawings()}
@@ -685,8 +645,6 @@ function ChairCharacterView() {
 }
 
 function ChairFormalView() {
-
-
   function SVGPicture({ id }) {
     const [viewBoxValue, setViewBoxValue] = useState('0 0 0 0');
 
@@ -775,20 +733,13 @@ function ChairFormalView() {
     return (
       <IonCol size="12" size-sm="4">
         <svg id={id} viewBox={viewBoxValue} preserveAspectRatio='xMidYMid meet'>
-          <defs>
-            <pattern id="cutPattern" x="0" y="0" width="10" height="10" patternContentUnits='userSpaceOnUse' patternUnits='userSpaceOnUse'>
-              <path d="M5,-5 l10,10
-                         M0,0 l10,10
-                         M-5,5 l10,10"
-                stroke="black" strokeWidth="1" />
-            </pattern>
-          </defs>
+          <CutPattern></CutPattern>
           {comp()}
         </svg>
       </IonCol>
     )
   }
-  
+
   return (
     <>
       <IonRow>

@@ -161,3 +161,16 @@ export function TextString({ ID, x, y, value }) {
         <text id={ID} className="text" x={x} y={y} >{value}</text>
     )
 }
+
+export function CutPattern(){
+    return (
+        <defs>
+            <pattern id="cutPattern" x="0" y="0" width="10" height="10" patternContentUnits='userSpaceOnUse' patternUnits='userSpaceOnUse'>
+              <path d="M5,-5 l10,10
+                         M0,0 l10,10
+                         M-5,5 l10,10"
+                stroke="black" strokeWidth="1" />
+            </pattern>
+          </defs>
+    )
+}
