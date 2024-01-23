@@ -1,8 +1,9 @@
 import { IonContent, IonItem, IonHeader, IonLabel,IonPage, IonSelect, IonTitle, IonToolbar, IonSelectOption, IonButton } from '@ionic/react';
 import './Home.css';
 import React, { useState } from 'react';
-import './svg-lines.css';
-import { ChairView } from './components';
+import '../theme/svg-lines.css';
+import { ChairView } from '../components/chair_components';
+import { TableView } from '../components/table_components';
 import { isPlatform  } from '@ionic/react';
 
 const Home: React.FC = () => {
@@ -28,7 +29,7 @@ const Home: React.FC = () => {
           {
             window.screen.orientation.lock("landscape-primary");
           }
-          return <ChairView></ChairView>
+          return <TableView></TableView>
         }
       default:
         return <></>;
