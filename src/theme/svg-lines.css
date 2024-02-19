@@ -9,6 +9,13 @@ svg{
     fill: transparent;
     stroke-width: 0.75mm;
 }
+
+.visibleLineCut{
+    stroke: black;
+    fill: "url(#cutPattern)";
+    stroke-width: 0.75mm;
+}
+
 .arrow{
     stroke: black;
     fill: black;
@@ -22,7 +29,7 @@ svg{
 
 .dottedLine_1{
     stroke: black;
-    fill: white;
+    fill: transparent;
     stroke-dasharray: 25,25;
     stroke-width: 0.18mm;
 }

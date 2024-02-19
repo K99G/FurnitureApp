@@ -3,11 +3,7 @@ import { useState } from "react";
 
 var radius = 75;
 
-export function PathCut({ ID, path }) {
-    return (
-        <path id={ID} fill="url(#cutPattern)" strokeWidth="0.75mmm" stroke="black" d={path} />
-    )
-}
+
 
 export function Cut({ ID, path }) {
     return (
@@ -69,6 +65,12 @@ export function PathVisible({ ID, path }) {
     )
 }
 
+export function PathCut({ ID, path }) {
+    return (
+        <path id={ID} fill="url(#cutPattern)" className="visibleLineCut" d={path} />
+    )
+}
+
 export function PathDotted({ type, ID, path }) {
     var className: string = 'dottedLine_' + (type) + '';
     return (
@@ -102,15 +104,23 @@ export function RectangleElement({ ID, x, y, width, height }) {
     )
 }
 
+export function RectangleElementDotted({type, ID, x, y, width, height }) {
+    var className: string = 'dottedLine_' + (type) + '';
+    return (
+        <rect id={ID} className={className} x={x} y={y} width={width} height={height} />
+    )
+}
+
+
 export function RectangleElementCut({ ID, x, y, width, height }) {
     return (
-        <rect id={ID} fill="url(#cutPattern)" strokeWidth="0.75mm" stroke="black" x={x} y={y} width={width} height={height} />
+        <rect id={ID} fill="url(#cutPattern)" className="visibleLineCut" x={x} y={y} width={width} height={height} />
     )
 }
 
 export function RectangleElementCutRound({ ID, x, y, width, height, rx, ry }) {
     return (
-        <rect id={ID} fill="url(#cutPattern)" strokeWidth="0.75mm" stroke="black" x={x} y={y} width={width} height={height} rx={rx} ry={ry} />
+        <rect id={ID} fill="url(#cutPattern)" className="visibleLineCut" x={x} y={y} width={width} height={height} rx={rx} ry={ry} />
     )
 }
 
@@ -123,7 +133,7 @@ export function RectangleElementRound({ ID, x, y, width, height, rx, ry }) {
 
 export function CircleView({ ID, cx, cy, onClick }) {
 
-    var color="black";
+    var color = "black";
     /*const [color, setColor]=useState("")
     function flash(){
         setColor("red");
@@ -138,7 +148,7 @@ export function CircleView({ ID, cx, cy, onClick }) {
             onClick={onClick}
             onMouseOver={() => (document.getElementById(ID).setAttribute("fill", "gray"))}
             onMouseLeave={() => (document.getElementById(ID).setAttribute("fill", "transparent"))}
-            /*onLoad={flash}*/
+        /*onLoad={flash}*/
         />
     )
 }
@@ -156,21 +166,100 @@ export function TextMeasure({ ID, x, y, value, deg }) {
     )
 }
 
+export function VerticalMeasure({ ID, x, y, value, magnify }) {
+    const measureTextOffset = 10;
+    return (
+        <>
+            <PathNarrowLine ID={ID+"_measure"}
+                path={'M' + (x) + ',' + (y) + ' v' + (value * magnify)} />
+            <CircleMeasure ID={ID + "_measure_circle_top"}
+                cx={x}
+                cy={y} />
+            <CircleMeasure ID={ID + "_measure_circle_bottom"}
+                cx={x}
+                cy={y + value*magnify} />
+            <TextMeasure ID={ID + "_measure_text"}
+                x={x - measureTextOffset}
+                y={y + value*magnify / 2}
+                value={value}
+                deg={270} />
+        </>
+    )
+}
+
+export function HorizontalMeasure({ ID, x, y, value, magnify }) {
+    const measureTextOffset = 10;
+    return (
+        <>
+            <PathNarrowLine ID={ID+"_measure"}
+                path={'M' + (x) + ',' + (y) + ' h' + (value * magnify)} />
+            <CircleMeasure ID={ID + "_measure_circle_left"}
+                cx={x}
+                cy={y} />
+            <CircleMeasure ID={ID + "_measure_circle_right"}
+                cx={x+ value*magnify}
+                cy={y } />
+            <TextMeasure ID={ID + "_measure_text"}
+                x={x + value*magnify / 2}
+                y={y - measureTextOffset}
+                value={value}
+                deg={0} />
+        </>
+    )
+}
+
+export function HorizontalMeasureHalf({ ID, x, y, displayValue, startValue }) {
+    const measureTextOffset = 10;
+    return (
+        <>
+            <PathNarrowLine ID={ID+"_measure"}
+                path={'M' + (startValue) + ',' + (y) + ' L' + (x)+' '+(y)+' '} />
+            <CircleMeasure ID={ID + "_measure_circle"}
+                cx={x}
+                cy={y} />
+            <TextMeasure ID={ID + "_measure_text"}
+                x={x/2+startValue/2}
+                y={y - measureTextOffset}
+                value={displayValue}
+                deg={0} />
+        </>
+    )
+}
+
+
+export function VerticalMeasureHalf({ ID, x, y, displayValue, startValue }) {
+    const measureTextOffset = 10;
+    return (
+        <>
+            <PathNarrowLine ID={ID+"_measure"}
+                path={'M' + (x) + ',' + (startValue) + ' L' + (x)+' '+(y)+' '} />
+            <CircleMeasure ID={ID + "_measure_circle"}
+                cx={x}
+                cy={y} />
+            <TextMeasure ID={ID + "_measure_text"}
+                x={x-measureTextOffset}
+                y={y/2+startValue/2}
+                value={displayValue}
+                deg={270} />
+        </>
+    )
+}
+
 export function TextString({ ID, x, y, value }) {
     return (
         <text id={ID} className="text" x={x} y={y} >{value}</text>
     )
 }
 
-export function CutPattern(){
+export function CutPattern() {
     return (
         <defs>
             <pattern id="cutPattern" x="0" y="0" width="10" height="10" patternContentUnits='userSpaceOnUse' patternUnits='userSpaceOnUse'>
-              <path d="M5,-5 l10,10
+                <path d="M5,-5 l10,10
                          M0,0 l10,10
                          M-5,5 l10,10"
-                stroke="black" strokeWidth="1" />
+                    stroke="black" strokeWidth="1" />
             </pattern>
-          </defs>
+        </defs>
     )
 }
