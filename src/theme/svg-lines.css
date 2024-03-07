@@ -1,55 +1,62 @@
-.svg_container{
+.svg_container {
     overflow: scroll;
 }
-svg{
+
+svg {
     background-color: white;
 }
-.visibleLine{
+
+.visibleLine {
     stroke: black;
     fill: transparent;
     stroke-width: 0.75mm;
 }
 
-.visibleLineCut{
+.visibleLineCut {
     stroke: black;
     fill: "url(#cutPattern)";
     stroke-width: 0.75mm;
 }
 
-.arrow{
+.arrow {
     stroke: black;
     fill: black;
     stroke-width: 0.18mm;
 }
-.narrowLine{
+
+.narrowLine {
     stroke: black;
     fill: transparent;
     stroke-width: 0.18mm;
 }
 
-.dottedLine_1{
+.dottedLine_1 {
     stroke: black;
     fill: transparent;
-    stroke-dasharray: 25,25;
+    stroke-dasharray: 25, 25;
     stroke-width: 0.18mm;
 }
-.dottedLine_2{
+
+.dottedLine_2 {
     stroke: black;
     fill: transparent;
-    stroke-dasharray: 5,5;
+    stroke-dasharray: 5, 5;
     stroke-width: 0.18mm;
 }
-.dottedLine_3{
+
+.dottedLine_3 {
     stroke: black;
     fill: transparent;
-    stroke-dasharray: 20,10,4,10;
+    stroke-dasharray: 20, 10, 4, 10;
     stroke-width: 0.18mm;
 }
-.circle{
-    stroke:black;
+
+.circle {
+    stroke: black;
     stroke-width: "5";
     fill: "black";
 }
+
 /*.clickableCircleTransparent{
     stroke: black;
     stroke-width: '7';
@@ -62,20 +69,35 @@ svg{
     fill: gray;
     fill-opacity: 0.4;
 }*/
-.polyline{
+.polyline {
     stroke: black;
     stroke-width: 0.75mm;
     fill: white;
 }
-.cut{
+
+.cut {
     stroke: black;
     stroke-width: 0.18mm;
-    stroke-dasharray: 20,20;
+    stroke-dasharray: 20, 20;
 }
-svg text{
+
+svg text {
     text-anchor: middle;
     dominant-baseline: middle;
 }
+
+.roundingText {
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-size: 10px;
+}
+
+.label {
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-size: 20px;
+}
+
 ion-slides {
     height: 100%;
-  }
+}
